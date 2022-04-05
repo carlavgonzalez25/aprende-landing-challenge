@@ -23,6 +23,13 @@ a {
   color: unset;
 }
 
+button {
+  border: 0;
+}
+button:hover {
+  cursor: pointer;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
@@ -168,8 +175,97 @@ a {
   text-align: center;
 }
 
-body header {
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+@media (min-width: 768px) {
+  .info-card {
+    max-width: 360px;
+  }
+  .info-card:nth-child(4) {
+    margin-left: 20px;
+  }
+  .info-card:nth-child(5) {
+    margin-right: 20px;
+  }
+}
+.info-card img {
+  width: 45px;
+  height: 45px;
+  margin-right: 20px;
+}
+.info-card .text-container {
+  display: flex;
+  flex-direction: column;
+}
+.info-card .text-container h4.title {
+  color: #fff;
+  font-weight: 600px;
+}
+.info-card .text-container p.text {
+  font-size: 14px;
+  color: #98afbc;
+}
+
+.filter-chip {
+  border-radius: 30px;
+  background-color: transparent;
+  border: 1px solid #111457;
+  padding: 6px 20px;
+  margin-right: 20px;
+}
+.filter-chip.active {
+  background-color: #111457;
+  color: #fff;
+}
+
+.grid-container {
+  display: grid;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.grid-container .class-card {
+  max-width: 272px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 6px #00000029;
+}
+@media (min-width: 768px) {
+  .grid-container .class-card {
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+}
+.grid-container .class-card img {
   width: 100%;
+  height: auto;
+}
+.grid-container .class-card .text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 20px 30px 20px;
+}
+.grid-container .class-card .text-container h4.title {
+  font-family: "collierbook", sans-serif;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.grid-container .class-card .text-container button.view-btn {
+  font-family: "Source Sans Pro", sans-serif;
+  color: #fff;
+  padding: 10px 30px 10px 30px;
+  width: fit-content;
+  background-color: #e3103e;
+}
+
+body header {
   background-color: #000;
   display: block;
   padding: 1rem;
@@ -230,6 +326,37 @@ body section#main .info .text {
   font-size: 16px;
   color: #fff;
   margin-bottom: 28px;
+}
+body section#second {
+  background-color: #111457;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 50px 25px 50px 21px;
+}
+@media (min-width: 768px) {
+  body section#second {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 50px 100px;
+  }
+}
+body section#third {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body section#third h2.title {
+  margin: 30px 20px;
+  font-family: "collierbook", sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+  text-align: center;
+}
+body section#third .filter-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -8,11 +8,14 @@
 
 // Components
 @import "components/form";
+@import "components/info-card";
+@import "components/chip";
+@import "components/class-grid";
 
 // Utilities
+
 body {
   header {
-    width: 100%;
     background-color: $black;
     display: block;
     padding: 1rem;
@@ -74,6 +77,40 @@ body {
           color: $white;
           margin-bottom: 28px;
         }
+      }
+    }
+
+    &#second {
+      background-color: $dark-blue;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      padding: $spacing-50 25px $spacing-50 21px;
+
+      @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: space-around;
+        padding: $spacing-50 $spacing-100;
+      }
+    }
+
+    &#third {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h2.title {
+        margin: $spacing-30 $spacing-20;
+        font-family: $font-collier;
+        font-size: 24px;
+        font-weight: normal;
+        text-align: center;
+      }
+
+      .filter-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: $spacing-30;
       }
     }
   }

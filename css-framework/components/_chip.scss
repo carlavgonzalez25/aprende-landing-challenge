@@ -1,0 +1,12 @@
+.filter-chip {
+  border-radius: $lg-radius;
+  background-color: transparent;
+  border: 1px solid $dark-blue;
+  padding: 6px $spacing-20;
+  margin-right: $spacing-20;
+
+  &.active {
+    background-color: $dark-blue;
+    color: $white;
+  }
+}
