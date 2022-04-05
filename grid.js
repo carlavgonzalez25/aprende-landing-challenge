@@ -24,18 +24,30 @@ var GridComponent = function (_React$Component) {
       });
     };
 
-    _this.filter = function (array) {
-      return array.filter(function (el) {
-        return el.taxonomy.some(function (tax) {
+    _this.filterList = function () {
+      console.log(" y aca no entra ? ", _this.state.selectedCategory);
+
+      //this.state.items.map((el) => console.log(el));
+
+      //return this.state.items;
+
+      return !_this.state.selectedCategory ? _this.state.items : _this.state.items.filter(function (el) {
+        return el.taxonomy["master-class-category"].some(function (tax) {
           return tax.slug === _this.state.selectedCategory;
         });
+      });
+    };
+
+    _this.handleClick = function (taxonomy) {
+      _this.setState(function (prev) {
+        return Object.assign({}, prev, { selectedCategory: taxonomy });
       });
     };
 
     _this.state = {
       items: [],
       isDataLoaded: false,
-      taxonomy: "all",
+      selectedCategory: null,
       visibleItems: 4
     };
     return _this;
@@ -52,6 +64,23 @@ var GridComponent = function (_React$Component) {
         _this2.setState(function (prev) {
           return Object.assign({}, prev, { items: data, isDataLoaded: true });
         });
+
+        /* Crear funcion que extraiga los taxonomy de cada clase y cree un array  
+          item.taxonomy.master-class-taxonomy.map((taxonomy) => this.setState((prev) => ({categories: {...prev.categories, }})))
+          item = [
+            {
+                taxonomy: {
+                    master-class-taxonomy:  [{
+                        name: "Emprendimiento",
+                        slug: "emprendimiento",
+                        term_id : 1786,
+                    }, {}]
+                }
+                    
+                ]
+            }, {}
+        ]
+          */
       });
     }
   }, {
@@ -71,32 +100,51 @@ var GridComponent = function (_React$Component) {
           "div",
           { className: "filter-container" },
           React.createElement(
-            "div",
-            { className: "filter-chip active", id: "todas" },
+            "button",
+            {
+              className: "filter-chip active",
+              id: "todas",
+              onClick: function onClick() {
+                return _this3.handleClick(null);
+              }
+            },
             "Todas"
           ),
           React.createElement(
-            "div",
-            { className: "filter-chip", id: "chocolateria" },
+            "button",
+            {
+              className: "filter-chip",
+              id: "chocolateria",
+              onClick: function onClick() {
+                return _this3.handleClick("chocolateria");
+              }
+            },
             "Chocolater\xEDa"
           ),
           React.createElement(
-            "div",
-            { className: "filter-chip", id: "Manicure" },
-            "Manicure"
+            "button",
+            {
+              className: "filter-chip",
+              id: "Manicure",
+              onClick: function onClick() {
+                return _this3.handleClick("emprendimiento");
+              }
+            },
+            "Emprendimiento"
           )
         ),
         React.createElement(
           "div",
           { className: "grid-container" },
-          this.state.items.filter(function (el, i) {
+          this.filterList()
+          /* this.state.items */
+          .filter(function (el, i) {
             return i < _this3.state.visibleItems;
           }).map(function (el) {
-            console.log(el);
             return React.createElement(
               "div",
               { key: el.id },
-              React.createElement(CardComponent, null)
+              React.createElement(CardComponent, { data: el })
             );
           })
         ),
@@ -122,7 +170,11 @@ var CardComponent = function (_React$Component2) {
   function CardComponent(props) {
     _classCallCheck(this, CardComponent);
 
-    return _possibleConstructorReturn(this, (CardComponent.__proto__ || Object.getPrototypeOf(CardComponent)).call(this, props));
+    var _this4 = _possibleConstructorReturn(this, (CardComponent.__proto__ || Object.getPrototypeOf(CardComponent)).call(this, props));
+
+    _this4.title = _this4.props.data.title.rendered;
+    _this4.img = _this4.props.data.meta.thumbnail.sizes.medium || null;
+    return _this4;
   }
 
   _createClass(CardComponent, [{
@@ -131,14 +183,17 @@ var CardComponent = function (_React$Component2) {
       return React.createElement(
         "div",
         { className: "class-card" },
-        React.createElement("img", { src: "./assets/card.png", alt: "class background image" }),
+        React.createElement("img", {
+          src: this.img || "./assets/card.png",
+          alt: "class background image"
+        }),
         React.createElement(
           "div",
           { className: "text-container" },
           React.createElement(
             "h4",
             { className: "title" },
-            "Title: H5 - Lorem ipsum dolor sit amet consectetur adipiscing"
+            this.title
           ),
           React.createElement(
             "button",
