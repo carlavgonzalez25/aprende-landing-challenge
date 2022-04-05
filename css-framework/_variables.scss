@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
+
+@font-face {
+  font-family: "collierbook";
+  src: url("../assets/font/collier-book-webfont.woff2") format("woff2"),
+    url("../assets/font/collier-book-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Colors */
+$black: #000;
+$white: #fff;
+$light-black: #2e4053;
+$gray: #d7dfe4;
+$dark-gray: #98afbc;
+$text-background: #5256a3;
+$red: #e3103e;
+
+/* Fonts */
+$font-source-pro: "Source Sans Pro", sans-serif;
+$font-collier: "collierbook", sans-serif;
+$base-font-size: 16px;
+$xs-font-size: 12px;
+$sm-font-size: 14px;
+$md-font-size: 30px;
+$lg-font-size: 45px;
+
+/* Spacing */
+
+$spacing-8: 8px;
+$spacing-10: 10px;
+$spacing-20: 20px;
+$spacing-24: 24px;
+$spacing-30: 30px;
+$spacing-50: 50px;
+$spacing-100: 100px;
+
+$base-margin: 10px;
+$sm-margin: 24px;
+$md-margin: 30px;
+$lg-margin: 50px;
+$xl-margin: 100px;
+
+$base-padding: 8px;
+$sm-padding: 10px;
+$md-padding: 20px;
+$lg-padding: 30px;
+$xl-padding: 50px;
+
+/* Borders */
+$base-radius: 5px;
+
+/* z-index */

@@ -1,0 +1,169 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  padding: $spacing-30 $spacing-24;
+  border-radius: $base-radius;
+  font-family: $font-source-pro;
+  color: $light-black;
+  align-items: center;
+  max-width: 288px;
+  margin-bottom: $spacing-50;
+
+  h4 {
+    font-size: $md-font-size;
+  }
+  .form-text {
+    font-size: $sm-font-size;
+    margin-bottom: $spacing-10;
+  }
+
+  @media (min-width: 768px) {
+    margin-right: $spacing-100;
+    margin-top: $spacing-30;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    .input-container {
+      position: relative;
+      display: flex;
+      flex: 1;
+
+      &.mb {
+        margin-bottom: $spacing-10;
+      }
+    }
+
+    input {
+      padding: $spacing-8 $spacing-20 $spacing-10 $spacing-20;
+      border: grey;
+      z-index: 15;
+      border: 1px solid $gray;
+      width: 100%;
+
+      &:focus + label.animated,
+      &:not(:placeholder-shown) + label {
+        transform: translateY(-20px) scale(0.8);
+        transition: all 0.1s;
+      }
+
+      &:focus {
+        outline-color: $text-background;
+      }
+
+      &::placeholder {
+        color: transparent;
+      }
+    }
+    label {
+      &.animated {
+        z-index: 20;
+        position: absolute;
+        left: 21px;
+        top: 9px;
+        color: $dark-gray;
+        transition: all 0.1s;
+      }
+    }
+
+    .phone-container {
+      display: flex;
+      margin-bottom: $spacing-10;
+      position: relative;
+
+      .number-container {
+        position: relative;
+        display: flex;
+        flex: 1;
+
+        input {
+          &:focus + label,
+          &:not(:placeholder-shown) + label {
+            transform: translateY(-20px) scale(0.8);
+            transition: all 0.1s;
+          }
+        }
+
+        label {
+          position: absolute;
+          left: 21px;
+          top: 9px;
+          color: $dark-gray;
+          transition: all 0.1s;
+          z-index: 20;
+        }
+      }
+    }
+
+    .select-container {
+      position: relative;
+
+      select {
+        padding: $spacing-8 $spacing-20 $spacing-8 $spacing-20;
+        margin-bottom: $spacing-10;
+        width: 100%;
+
+        &:focus + label {
+          transform: translateY(-20px) scale(0.8);
+          transition: all 0.1s;
+        }
+      }
+
+      label {
+        position: absolute;
+        left: 9px;
+        top: 9px;
+        color: $dark-gray;
+        transition: all 0.1s;
+        z-index: 20;
+      }
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: $spacing-8;
+      justify-content: center;
+
+      input {
+        width: unset;
+        margin-right: $spacing-8;
+      }
+    }
+    button {
+      padding: $spacing-10;
+      background-color: $red;
+      border: 0;
+      color: $white;
+      margin-bottom: $spacing-10;
+    }
+
+    .small-text {
+      font-size: $xs-font-size;
+
+      a {
+        font-size: $xs-font-size;
+        text-decoration: underline;
+      }
+
+      &.mobile {
+        @media (min-width: 768px) {
+          display: none;
+        }
+      }
+      &.desktop {
+        display: none;
+        @media (min-width: 768px) {
+          display: block;
+        }
+      }
+
+      &.center {
+        text-align: center;
+      }
+    }
+  }
+}

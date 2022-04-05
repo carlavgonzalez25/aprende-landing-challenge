@@ -1,0 +1,80 @@
+// Variables and functions
+@import "variables";
+
+// Base and layout
+@import "base";
+
+// Colors
+
+// Components
+@import "components/form";
+
+// Utilities
+body {
+  header {
+    width: 100%;
+    background-color: $black;
+    display: block;
+    padding: 1rem;
+  }
+
+  section {
+    &#main {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background-image: url(../assets/hero.png);
+      background-repeat: no-repeat;
+      background-color: $black;
+      background-position: top;
+      background-size: 700px;
+      padding: 0 20px;
+      align-items: center;
+
+      @media (min-width: 768px) {
+        min-height: unset;
+        flex-direction: row;
+        background-size: cover;
+        background-position: top right;
+        align-items: flex-end;
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 250px;
+
+        @media (min-width: 768px) {
+          margin: 0 20px 23px 115px;
+          align-items: flex-start;
+        }
+
+        .title {
+          font-size: 30px;
+          letter-spacing: 0px;
+          color: $white;
+          width: fit-content;
+          font-family: $font-collier;
+          font-weight: normal;
+
+          @media (min-width: 768px) {
+            font-size: 45px;
+          }
+
+          &.background {
+            background-color: $text-background;
+            padding: 5px 14px 5px 17px;
+            margin-bottom: 15px;
+          }
+        }
+        .text {
+          font-size: 16px;
+          color: $white;
+          margin-bottom: 28px;
+        }
+      }
+    }
+  }
+}
