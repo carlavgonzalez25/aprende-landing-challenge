@@ -32,10 +32,10 @@ var GridComponent = function (_React$Component) {
       });
     };
 
-    _this.handleClick = function (taxonomy) {
+    _this.handleClick = function (taxonomy, e) {
       _this.setState(function () {
         return {
-          isDataLoaded: false
+          isLoading: { categories: true }
         };
       });
 
@@ -44,7 +44,7 @@ var GridComponent = function (_React$Component) {
           return Object.assign({}, prev, {
             selectedCategory: taxonomy,
             visibleItems: 4,
-            isDataLoaded: true
+            isLoading: { categories: false }
           });
         });
       }, 200);
@@ -52,7 +52,7 @@ var GridComponent = function (_React$Component) {
 
     _this.state = {
       items: [],
-      isDataLoaded: false,
+      isLoading: { fetch: true, categories: false },
       selectedCategory: null,
       visibleItems: 4,
       taxonomiesList: []
@@ -80,7 +80,7 @@ var GridComponent = function (_React$Component) {
         _this2.setState(function (prev) {
           return Object.assign({}, prev, {
             items: data,
-            isDataLoaded: true,
+            isLoading: { fetch: false },
             taxonomiesList: taxonomiesList
           });
         });
@@ -95,7 +95,7 @@ var GridComponent = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      return this.state.isDataLoaded ? React.createElement(
+      return !this.state.isLoading.fetch ? React.createElement(
         React.Fragment,
         null,
         React.createElement(
@@ -109,10 +109,10 @@ var GridComponent = function (_React$Component) {
           React.createElement(
             "button",
             {
-              className: "filter-chip active",
+              className: "filter-chip " + (!this.state.selectedCategory && "active"),
               id: "todas",
-              onClick: function onClick() {
-                return _this3.handleClick(null);
+              onClick: function onClick(e) {
+                return _this3.handleClick(null, e);
               },
               name: "all"
             },
@@ -123,28 +123,36 @@ var GridComponent = function (_React$Component) {
               "button",
               {
                 key: taxonomy + i,
-                className: "filter-chip",
-                onClick: function onClick() {
-                  return _this3.handleClick(taxonomy);
+                className: "filter-chip " + (_this3.state.selectedCategory === taxonomy && "active"),
+                onClick: function onClick(e) {
+                  return _this3.handleClick(taxonomy, e);
                 }
               },
               taxonomy
             );
           })
         ),
-        React.createElement(
-          "div",
-          { className: "grid-container" },
-          this.filterList().filter(function (el, i) {
-            return i < _this3.state.visibleItems;
-          }).map(function (el) {
-            return React.createElement(CardComponent, { data: el, key: el.id });
-          })
-        ),
-        React.createElement(
-          "button",
-          { className: "view-more", onClick: this.viewMore },
-          "Ver mas"
+        !this.state.isLoading.categories ? React.createElement(
+          React.Fragment,
+          null,
+          React.createElement(
+            "div",
+            { className: "grid-container" },
+            this.filterList().filter(function (el, i) {
+              return i < _this3.state.visibleItems;
+            }).map(function (el) {
+              return React.createElement(CardComponent, { data: el, key: el.id });
+            })
+          ),
+          React.createElement(
+            "button",
+            { className: "view-more", onClick: this.viewMore },
+            "Ver mas"
+          )
+        ) : React.createElement(
+          "p",
+          null,
+          " fetching data.. "
         )
       ) : React.createElement(
         "p",
@@ -178,7 +186,7 @@ var CardComponent = function (_React$Component2) {
         { className: "class-card" },
         React.createElement(
           "div",
-          { "class": "img-container" },
+          { className: "img-container" },
           React.createElement("img", {
             src: this.img || "./assets/card.png",
             alt: "class background image"

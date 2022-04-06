@@ -19,6 +19,10 @@
   }
 
   @media (min-width: 768px) {
+    margin-right: $spacing-20;
+    margin-top: $spacing-30;
+  }
+  @media (min-width: 1024px) {
     margin-right: $spacing-100;
     margin-top: $spacing-30;
   }

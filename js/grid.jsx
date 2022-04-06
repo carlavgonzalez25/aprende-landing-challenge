@@ -7,7 +7,7 @@ class GridComponent extends React.Component {
     super(props);
     this.state = {
       items: [],
-      isDataLoaded: false,
+      isLoading: { fetch: true, categories: false },
       selectedCategory: null,
       visibleItems: 4,
       taxonomiesList: [],
@@ -32,7 +32,7 @@ class GridComponent extends React.Component {
         this.setState((prev) => ({
           ...prev,
           items: data,
-          isDataLoaded: true,
+          isLoading: { fetch: false },
           taxonomiesList: taxonomiesList,
         }));
       });
@@ -52,9 +52,9 @@ class GridComponent extends React.Component {
         );
   };
 
-  handleClick = (taxonomy) => {
+  handleClick = (taxonomy, e) => {
     this.setState(() => ({
-      isDataLoaded: false,
+      isLoading: { categories: true },
     }));
 
     setTimeout(
@@ -63,7 +63,7 @@ class GridComponent extends React.Component {
           ...prev,
           selectedCategory: taxonomy,
           visibleItems: 4,
-          isDataLoaded: true,
+          isLoading: { categories: false },
         })),
       200
     );
@@ -72,14 +72,16 @@ class GridComponent extends React.Component {
   //TODO: falta escribir el toggle de clases
 
   render() {
-    return this.state.isDataLoaded ? (
+    return !this.state.isLoading.fetch ? (
       <React.Fragment>
         <h2 className="title">Explora todas nuestras Clases Magistrales</h2>
         <div className="filter-container">
           <button
-            className="filter-chip active"
+            className={`filter-chip ${
+              !this.state.selectedCategory && "active"
+            }`}
             id="todas"
-            onClick={() => this.handleClick(null)}
+            onClick={(e) => this.handleClick(null, e)}
             name="all"
           >
             Todas
@@ -87,25 +89,32 @@ class GridComponent extends React.Component {
           {this.state.taxonomiesList.map((taxonomy, i) => (
             <button
               key={taxonomy + i}
-              className="filter-chip"
-              onClick={() => this.handleClick(taxonomy)}
+              className={`filter-chip ${
+                this.state.selectedCategory === taxonomy && "active"
+              }`}
+              onClick={(e) => this.handleClick(taxonomy, e)}
             >
               {taxonomy}
             </button>
           ))}
         </div>
 
-        <div className="grid-container">
-          {this.filterList()
-            .filter((el, i) => i < this.state.visibleItems)
-            .map((el) => {
-              return <CardComponent data={el} key={el.id} />;
-            })}
-        </div>
-
-        <button className="view-more" onClick={this.viewMore}>
-          Ver mas
-        </button>
+        {!this.state.isLoading.categories ? (
+          <React.Fragment>
+            <div className="grid-container">
+              {this.filterList()
+                .filter((el, i) => i < this.state.visibleItems)
+                .map((el) => {
+                  return <CardComponent data={el} key={el.id} />;
+                })}
+            </div>
+            <button className="view-more" onClick={this.viewMore}>
+              Ver mas
+            </button>
+          </React.Fragment>
+        ) : (
+          <p> fetching data.. </p>
+        )}
       </React.Fragment>
     ) : (
       <p> fetching data.. </p>
@@ -123,7 +132,7 @@ class CardComponent extends React.Component {
   render() {
     return (
       <div className="class-card">
-        <div class="img-container">
+        <div className="img-container">
           <img
             src={this.img || "./assets/card.png"}
             alt="class background image"

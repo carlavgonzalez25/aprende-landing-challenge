@@ -46,7 +46,7 @@ body {
         min-height: unset;
         flex-direction: row;
         background-size: cover;
-        background-position: -1px -1px;
+        background-position: -1px 50%;
         align-items: flex-end;
       }
 
@@ -58,8 +58,12 @@ body {
         margin-top: 250px;
 
         @media (min-width: 768px) {
-          margin: 0 20px 23px 115px;
+          margin: 0 $spacing-20 $spacing-24 $spacing-20;
           align-items: flex-start;
+        }
+
+        @media (min-width: 1024px) {
+          margin: 0 $spacing-20 $spacing-24 $spacing-100;
         }
 
         .title {
@@ -107,11 +111,23 @@ body {
 footer {
   display: flex;
   flex-direction: column;
-  width: 100%;
   padding: $spacing-30 $spacing-15;
   background-color: $dark-blue;
   color: $white;
   align-items: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    padding: $spacing-30 $spacing-100 $spacing-30 $spacing-100;
+  }
+
+  .copyright {
+    margin: 0;
+
+    @media (min-width: 768px) {
+      margin-right: auto;
+    }
+  }
 
   .social-container {
     display: flex;
@@ -120,5 +136,80 @@ footer {
     padding-bottom: $spacing-24;
     border-bottom: 1px solid $light-black;
     margin-bottom: $spacing-15;
+
+    @media (min-width: 768px) {
+      width: fit-content;
+      order: 3;
+      border-bottom: 0;
+      align-items: center;
+      justify-self: end;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    a {
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      color: $white;
+    }
+
+    .instagram {
+      background-image: url(/assets/ico_social_instagram.svg);
+      width: 23px;
+      height: 23px;
+      margin-right: $spacing-24;
+
+      @media (min-width: 768px) {
+        width: 18px;
+        height: 18px;
+      }
+    }
+    .facebook {
+      background-image: url(/assets/ico_social_facebook.svg);
+      width: 11px;
+      height: 23px;
+      margin-right: $spacing-24;
+
+      @media (min-width: 768px) {
+        width: 18px;
+        height: 18px;
+      }
+    }
+    .youtube {
+      background-image: url(/assets/youtube-brands.svg);
+      width: 30px;
+      height: 21px;
+      margin-right: $spacing-24;
+
+      @media (min-width: 768px) {
+        display: none;
+      }
+    }
+    .linkedin {
+      background-image: url(/assets/ico_social_linkedin.svg);
+      width: 23px;
+      height: 23px;
+      margin-right: $spacing-24;
+      display: none;
+
+      @media (min-width: 768px) {
+        display: block;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+  .link-container {
+    margin-top: $spacing-10;
+
+    @media (min-width: 768px) {
+      margin-top: 0;
+      margin-right: $spacing-50;
+    }
+
+    a {
+      margin-right: $spacing-10;
+    }
   }
 }
