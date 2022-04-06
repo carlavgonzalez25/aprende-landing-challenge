@@ -4,9 +4,20 @@
   border: 1px solid $dark-blue;
   padding: 6px $spacing-20;
   margin-right: $spacing-20;
+  transition: all 0.1s;
+  margin-bottom: $spacing-10;
+
+  &:hover {
+    background-color: $light-blue;
+    border-color: $light-blue;
+    color: $white;
+    transition: all 0.1s;
+  }
 
   &.active {
     background-color: $dark-blue;
+    border-color: $dark-blue;
     color: $white;
+    transition: all 0.1s;
   }
 }

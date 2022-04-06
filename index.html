@@ -25,91 +25,140 @@
         <p class="form-text">
           TextP1 Lorem ipsum dolor consectetur adipiscing elit platea rhoncus
         </p>
-        <form>
-          <span class="input-container mb">
-            <input
-              type="text"
-              name="name"
-              id="name-input"
-              required
-              placeholder="Nombre*"
-            />
-            <label class="animated" for="name-input">Nombre*</label>
-          </span>
-          <span class="input-container mb">
-            <input
-              type="text"
-              name="lastname-input"
-              required
-              placeholder="Apellido*"
-            />
-            <label class="animated" for="lastname-input">Apellido*</label>
-          </span>
-          <span class="input-container mb">
-            <input
-              type="text"
-              name="email-input"
-              required
-              placeholder="Correo electrónico*"
-            />
-            <label class="animated" for="email-input"
-              >Correo electrónico*</label
-            >
-          </span>
-          <span class="phone-container" required>
-            <select name="phone-id">
-              <option value="+57">
-                <img src="" alt="Venezuela's Flag" />
-                <p>+54</p>
-              </option>
-              <option value="+57">
-                <img src="" alt="Argentina's Flag" />
-                <p>+57</p>
-              </option>
-              <option value="+57">
-                <img src="" alt="Argentinian Flag" />
-                <p>+57</p>
-              </option>
-              <option value="+57">
-                <img src="" alt="Argentinian Flag" />
-                <p>+57</p>
-              </option>
-            </select>
-            <span class="number-container">
-              <input type="number" name="phone" placeholder="Teléfono*" />
-              <label for="phone">Teléfono*</label>
+        <form id="contact-form">
+          <div class="step step-1 active">
+            <span class="input-container mb">
+              <input
+                type="text"
+                name="name"
+                id="name-input"
+                required
+                placeholder="Nombre*"
+              />
+              <label class="animated" for="name-input">Nombre*</label>
             </span>
-          </span>
-          <span class="select-container">
-            <select name="area-of-interest">
-              <option value="first">Texto del marcador</option>
-              <option value="second">Texto del marcador</option>
-              <option value="third">Texto del marcador</option>
-            </select>
-            <label for="area-of-interest">Área de interés*</label>
-          </span>
+            <span class="input-container mb">
+              <input
+                type="text"
+                name="lastname-input"
+                required
+                placeholder="Apellido*"
+              />
+              <label class="animated" for="lastname-input">Apellido*</label>
+            </span>
+            <span class="input-container mb">
+              <input
+                type="text"
+                name="email-input"
+                required
+                placeholder="Correo electrónico*"
+              />
+              <label class="animated" for="email-input"
+                >Correo electrónico*</label
+              >
+            </span>
+            <span class="phone-container">
+              <select name="phone-id">
+                <option value="+57">
+                  <img src="" alt="Venezuela's Flag" />
+                  <p>+54</p>
+                </option>
+                <option value="+57">
+                  <img src="" alt="Argentina's Flag" />
+                  <p>+57</p>
+                </option>
+                <option value="+57">
+                  <img src="" alt="Argentinian Flag" />
+                  <p>+57</p>
+                </option>
+                <option value="+57">
+                  <img src="" alt="Argentinian Flag" />
+                  <p>+57</p>
+                </option>
+              </select>
+              <span class="number-container">
+                <input type="number" name="phone" placeholder="Teléfono*" />
+                <label for="phone">Teléfono*</label>
+              </span>
+            </span>
+            <span class="select-container">
+              <select name="area-of-interest" required>
+                <option value="first" class="hidden"></option>
+                <option value="second">Texto del marcador</option>
+                <option value="third">Texto del marcador</option>
+              </select>
+              <label for="area-of-interest">Área de interés*</label>
+            </span>
 
-          <span class="select-container">
-            <select name="occupation">
-              <option value="first">Texto del marcador</option>
-              <option value="second">Texto del marcador</option>
-            </select>
-            <label for="occupation">Ocupación*</label>
-          </span>
-          <div class="checkbox-container">
-            <input type="checkbox" checked name="checkbox" id="form-checkbox" />
-            <p class="small-text mobile">
-              Recibe mensajes via WhatsApp y Sms sobre nuestros diplomados
-            </p>
-            <p class="small-text desktop">Recibe mensajes via WhatsApp y Sms</p>
+            <span class="select-container">
+              <select name="occupation" required>
+                <option value="first" class="hidden"></option>
+                <option value="second">Texto del marcador</option>
+                <option value="second">Texto del marcador</option>
+              </select>
+              <label for="occupation">Ocupación*</label>
+            </span>
+            <div class="checkbox-container">
+              <input
+                type="checkbox"
+                checked
+                name="checkbox"
+                id="form-checkbox"
+              />
+              <p class="small-text mobile">
+                Recibe mensajes via WhatsApp y Sms sobre nuestros diplomados
+              </p>
+              <p class="small-text desktop">
+                Recibe mensajes via WhatsApp y Sms
+              </p>
+            </div>
+            <button type="button" class="next">Quiero conocer precios</button>
           </div>
-          <button type="submit" id="submit-btn">Lorem Ipsum</button>
-          <p class="small-text center">
-            Al compartir tu datos, aceptas nuestros
-            <a href="#">Términos de servicio</a> y
-            <a href="#">Política de privacidad</a>
-          </p>
+
+          <div class="step step-2">
+            <span class="input-container mb">
+              <input
+                type="text"
+                name="name"
+                id="name-input"
+                required
+                placeholder="Ocupación"
+              />
+              <label class="animated" for="name-input">Ocupación*</label>
+            </span>
+            <span class="input-container mb">
+              <input
+                type="text"
+                name="lastname-input"
+                required
+                placeholder="Motivación"
+              />
+              <label class="animated" for="lastname-input">Motivación*</label>
+            </span>
+            <button type="button" class="next">Ya casi terminamos</button>
+          </div>
+
+          <div class="step step-3">
+            <span class="input-container mb">
+              <input
+                type="text"
+                name="birthdate"
+                id="birthdate-input"
+                required
+                placeholder="Fecha de nacimiento"
+              />
+              <label class="animated" for="name-input"
+                >Fecha de nacimiento*</label
+              >
+            </span>
+            <button type="submit" class="submit">Finalizar</button>
+          </div>
         </form>
+        <p class="small-text center">
+          Al compartir tu datos, aceptas nuestros
+          <a href="#">Términos de servicio</a> y
+          <a href="#">Política de privacidad</a>
+        </p>
       </div>
     </section>
 
@@ -177,5 +226,18 @@
       crossorigin
     ></script>
     <script src="grid.js"></script>
+    <script src="functions.js"></script>
   </body>
+  <footer>
+    <div class="social-container">
+      <div class="instagram">Instagram</div>
+      <div class="instagram">Facebook</div>
+      <div class="instagram">Youtube</div>
+    </div>
+    <p class="copyright">© 2021 Aprende Institute.</p>
+    <div class="link-container">
+      <a href="#">Términos y condiciones</a>
+      <a href="#">Política de privacidad</a>
+    </div>
+  </footer>
 </html>

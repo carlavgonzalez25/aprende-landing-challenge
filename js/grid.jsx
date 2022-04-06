@@ -10,6 +10,7 @@ class GridComponent extends React.Component {
       isDataLoaded: false,
       selectedCategory: null,
       visibleItems: 4,
+      taxonomiesList: [],
     };
   }
 
@@ -17,27 +18,23 @@ class GridComponent extends React.Component {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        this.setState((prev) => ({ ...prev, items: data, isDataLoaded: true }));
+        // Recorro la lista de cursos, y extraigo las categorias
+        const taxonomiesList = [];
 
-        /* Crear funcion que extraiga los taxonomy de cada clase y cree un array  
+        data.map((el) =>
+          el.taxonomy["master-class-category"].map(
+            (taxonomy) =>
+              !taxonomiesList.includes(taxonomy.slug) &&
+              taxonomiesList.push(taxonomy.slug)
+          )
+        );
 
-        item.taxonomy.master-class-taxonomy.map((taxonomy) => this.setState((prev) => ({categories: {...prev.categories, }})))
-
-        item = [
-            {
-                taxonomy: {
-                    master-class-taxonomy:  [{
-                        name: "Emprendimiento",
-                        slug: "emprendimiento",
-                        term_id : 1786,
-                    }, {}]
-                }
-                    
-                ]
-            }, {}
-        ]
-
-        */
+        this.setState((prev) => ({
+          ...prev,
+          items: data,
+          isDataLoaded: true,
+          taxonomiesList: taxonomiesList,
+        }));
       });
   }
 
@@ -46,12 +43,6 @@ class GridComponent extends React.Component {
   };
 
   filterList = () => {
-    console.log(" y aca no entra ? ", this.state.selectedCategory);
-
-    //this.state.items.map((el) => console.log(el));
-
-    //return this.state.items;
-
     return !this.state.selectedCategory
       ? this.state.items
       : this.state.items.filter((el) =>
@@ -62,8 +53,23 @@ class GridComponent extends React.Component {
   };
 
   handleClick = (taxonomy) => {
-    this.setState((prev) => ({ ...prev, selectedCategory: taxonomy }));
+    this.setState(() => ({
+      isDataLoaded: false,
+    }));
+
+    setTimeout(
+      () =>
+        this.setState((prev) => ({
+          ...prev,
+          selectedCategory: taxonomy,
+          visibleItems: 4,
+          isDataLoaded: true,
+        })),
+      200
+    );
   };
+
+  //TODO: falta escribir el toggle de clases
 
   render() {
     return this.state.isDataLoaded ? (
@@ -74,35 +80,26 @@ class GridComponent extends React.Component {
             className="filter-chip active"
             id="todas"
             onClick={() => this.handleClick(null)}
+            name="all"
           >
             Todas
           </button>
-          <button
-            className="filter-chip"
-            id="chocolateria"
-            onClick={() => this.handleClick("chocolateria")}
-          >
-            Chocolatería
-          </button>
-          <button
-            className="filter-chip"
-            id="Manicure"
-            onClick={() => this.handleClick("emprendimiento")}
-          >
-            Emprendimiento
-          </button>
+          {this.state.taxonomiesList.map((taxonomy, i) => (
+            <button
+              key={taxonomy + i}
+              className="filter-chip"
+              onClick={() => this.handleClick(taxonomy)}
+            >
+              {taxonomy}
+            </button>
+          ))}
         </div>
 
         <div className="grid-container">
           {this.filterList()
-            /* this.state.items */
             .filter((el, i) => i < this.state.visibleItems)
             .map((el) => {
-              return (
-                <div key={el.id}>
-                  <CardComponent data={el} />
-                </div>
-              );
+              return <CardComponent data={el} key={el.id} />;
             })}
         </div>
 
@@ -126,10 +123,12 @@ class CardComponent extends React.Component {
   render() {
     return (
       <div className="class-card">
-        <img
-          src={this.img || "./assets/card.png"}
-          alt="class background image"
-        />
+        <div class="img-container">
+          <img
+            src={this.img || "./assets/card.png"}
+            alt="class background image"
+          />
+        </div>
         <div className="text-container">
           <h4 className="title">{this.title}</h4>
           <button className="view-btn"> Ver clase </button>

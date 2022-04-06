@@ -19,6 +19,14 @@ body {
     background-color: $black;
     display: block;
     padding: 1rem;
+
+    img {
+      max-width: 240px;
+      @media (min-width: 768px) {
+        max-width: 240px;
+        margin-left: $spacing-50;
+      }
+    }
   }
 
   section {
@@ -38,7 +46,7 @@ body {
         min-height: unset;
         flex-direction: row;
         background-size: cover;
-        background-position: top right;
+        background-position: -1px -1px;
         align-items: flex-end;
       }
 
@@ -67,7 +75,7 @@ body {
           }
 
           &.background {
-            background-color: $text-background;
+            background-color: $light-blue;
             padding: 5px 14px 5px 17px;
             margin-bottom: 15px;
           }
@@ -93,25 +101,24 @@ body {
         padding: $spacing-50 $spacing-100;
       }
     }
+  }
+}
 
-    &#third {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: $spacing-30 $spacing-15;
+  background-color: $dark-blue;
+  color: $white;
+  align-items: center;
 
-      h2.title {
-        margin: $spacing-30 $spacing-20;
-        font-family: $font-collier;
-        font-size: 24px;
-        font-weight: normal;
-        text-align: center;
-      }
-
-      .filter-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: $spacing-30;
-      }
-    }
+  .social-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-bottom: $spacing-24;
+    border-bottom: 1px solid $light-black;
+    margin-bottom: $spacing-15;
   }
 }

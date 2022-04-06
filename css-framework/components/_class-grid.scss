@@ -1,45 +1,86 @@
-.grid-container {
-  display: grid;
+section#third {
+  display: flex;
   flex-direction: column;
+  align-items: center;
 
-  @media (min-width: 768px) {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  h2.title {
+    margin: $spacing-30 $spacing-20;
+    font-family: $font-collier;
+    font-size: 24px;
+    font-weight: normal;
+    text-align: center;
   }
 
-  .class-card {
-    max-width: 272px;
-    margin-bottom: $spacing-20;
-    box-shadow: 0px 0px 6px #00000029;
+  .filter-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: $spacing-30;
+    flex-wrap: wrap;
+  }
+
+  .grid-container {
+    display: grid;
+    flex-direction: column;
 
     @media (min-width: 768px) {
-      margin-right: $spacing-8;
-      margin-left: $spacing-8;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
     }
 
-    img {
-      width: 100%;
-      height: auto;
-    }
+    .class-card {
+      width: 272px;
+      height: 295px;
+      margin-bottom: $spacing-20;
+      box-shadow: 0px 0px 6px #00000029;
 
-    .text-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: $spacing-15 $spacing-20 $spacing-30 $spacing-20;
-
-      h4.title {
-        font-family: $font-collier;
-        text-align: center;
-        margin-bottom: $spacing-10;
+      @media (min-width: 768px) {
+        margin-right: $spacing-8;
+        margin-left: $spacing-8;
       }
-      button.view-btn {
-        font-family: $font-source-pro;
-        color: $white;
-        padding: $spacing-10 $spacing-30 $spacing-10 $spacing-30;
-        width: fit-content;
-        background-color: $red;
+
+      .img-container {
+        width: 272px;
+        height: 142px;
+        overflow: hidden;
+        img {
+          width: auto;
+          min-height: 153px;
+          max-height: 155px;
+        }
+      }
+
+      .text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: $spacing-15 $spacing-20 $spacing-30 $spacing-20;
+        height: 117px;
+        justify-content: space-between;
+
+        h4.title {
+          font-family: $font-collier;
+          text-align: center;
+          margin-bottom: $spacing-10;
+        }
+        button.view-btn {
+          font-family: $font-source-pro;
+          color: $white;
+          padding: $spacing-10 $spacing-30 $spacing-10 $spacing-30;
+          width: fit-content;
+          background-color: $red;
+          border-radius: $base-radius;
+          margin-bottom: $spacing-10;
+        }
       }
     }
+  }
+
+  button.view-more {
+    border: 1px solid $light-red;
+    color: $light-red;
+    padding: $spacing-10 $spacing-30;
+    background-color: transparent;
+    border-radius: $base-radius;
+    margin-bottom: $spacing-30;
   }
 }

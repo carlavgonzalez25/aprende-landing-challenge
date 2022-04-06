@@ -25,12 +25,6 @@ var GridComponent = function (_React$Component) {
     };
 
     _this.filterList = function () {
-      console.log(" y aca no entra ? ", _this.state.selectedCategory);
-
-      //this.state.items.map((el) => console.log(el));
-
-      //return this.state.items;
-
       return !_this.state.selectedCategory ? _this.state.items : _this.state.items.filter(function (el) {
         return el.taxonomy["master-class-category"].some(function (tax) {
           return tax.slug === _this.state.selectedCategory;
@@ -39,16 +33,29 @@ var GridComponent = function (_React$Component) {
     };
 
     _this.handleClick = function (taxonomy) {
-      _this.setState(function (prev) {
-        return Object.assign({}, prev, { selectedCategory: taxonomy });
+      _this.setState(function () {
+        return {
+          isDataLoaded: false
+        };
       });
+
+      setTimeout(function () {
+        return _this.setState(function (prev) {
+          return Object.assign({}, prev, {
+            selectedCategory: taxonomy,
+            visibleItems: 4,
+            isDataLoaded: true
+          });
+        });
+      }, 200);
     };
 
     _this.state = {
       items: [],
       isDataLoaded: false,
       selectedCategory: null,
-      visibleItems: 4
+      visibleItems: 4,
+      taxonomiesList: []
     };
     return _this;
   }
@@ -61,30 +68,30 @@ var GridComponent = function (_React$Component) {
       fetch(url).then(function (res) {
         return res.json();
       }).then(function (data) {
-        _this2.setState(function (prev) {
-          return Object.assign({}, prev, { items: data, isDataLoaded: true });
+        // Recorro la lista de cursos, y extraigo las categorias
+        var taxonomiesList = [];
+
+        data.map(function (el) {
+          return el.taxonomy["master-class-category"].map(function (taxonomy) {
+            return !taxonomiesList.includes(taxonomy.slug) && taxonomiesList.push(taxonomy.slug);
+          });
         });
 
-        /* Crear funcion que extraiga los taxonomy de cada clase y cree un array  
-          item.taxonomy.master-class-taxonomy.map((taxonomy) => this.setState((prev) => ({categories: {...prev.categories, }})))
-          item = [
-            {
-                taxonomy: {
-                    master-class-taxonomy:  [{
-                        name: "Emprendimiento",
-                        slug: "emprendimiento",
-                        term_id : 1786,
-                    }, {}]
-                }
-                    
-                ]
-            }, {}
-        ]
-          */
+        _this2.setState(function (prev) {
+          return Object.assign({}, prev, {
+            items: data,
+            isDataLoaded: true,
+            taxonomiesList: taxonomiesList
+          });
+        });
       });
     }
   }, {
     key: "render",
+
+
+    //TODO: falta escribir el toggle de clases
+
     value: function render() {
       var _this3 = this;
 
@@ -106,46 +113,32 @@ var GridComponent = function (_React$Component) {
               id: "todas",
               onClick: function onClick() {
                 return _this3.handleClick(null);
-              }
+              },
+              name: "all"
             },
             "Todas"
           ),
-          React.createElement(
-            "button",
-            {
-              className: "filter-chip",
-              id: "chocolateria",
-              onClick: function onClick() {
-                return _this3.handleClick("chocolateria");
-              }
-            },
-            "Chocolater\xEDa"
-          ),
-          React.createElement(
-            "button",
-            {
-              className: "filter-chip",
-              id: "Manicure",
-              onClick: function onClick() {
-                return _this3.handleClick("emprendimiento");
-              }
-            },
-            "Emprendimiento"
-          )
+          this.state.taxonomiesList.map(function (taxonomy, i) {
+            return React.createElement(
+              "button",
+              {
+                key: taxonomy + i,
+                className: "filter-chip",
+                onClick: function onClick() {
+                  return _this3.handleClick(taxonomy);
+                }
+              },
+              taxonomy
+            );
+          })
         ),
         React.createElement(
           "div",
           { className: "grid-container" },
-          this.filterList()
-          /* this.state.items */
-          .filter(function (el, i) {
+          this.filterList().filter(function (el, i) {
             return i < _this3.state.visibleItems;
           }).map(function (el) {
-            return React.createElement(
-              "div",
-              { key: el.id },
-              React.createElement(CardComponent, { data: el })
-            );
+            return React.createElement(CardComponent, { data: el, key: el.id });
           })
         ),
         React.createElement(
@@ -183,10 +176,14 @@ var CardComponent = function (_React$Component2) {
       return React.createElement(
         "div",
         { className: "class-card" },
-        React.createElement("img", {
-          src: this.img || "./assets/card.png",
-          alt: "class background image"
-        }),
+        React.createElement(
+          "div",
+          { "class": "img-container" },
+          React.createElement("img", {
+            src: this.img || "./assets/card.png",
+            alt: "class background image"
+          })
+        ),
         React.createElement(
           "div",
           { className: "text-container" },
